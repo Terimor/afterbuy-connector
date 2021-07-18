@@ -48,6 +48,11 @@ class SoldItem
      */
     private ?Category $category = null;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private ?float $volume = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,5 +116,15 @@ class SoldItem
     public function setCategory(?Category $category): void
     {
         $this->category = $category;
+    }
+
+    public function getVolume(): ?float
+    {
+        return $this->volume;
+    }
+
+    public function setVolume(?float $volume): void
+    {
+        $this->volume = $volume;
     }
 }
