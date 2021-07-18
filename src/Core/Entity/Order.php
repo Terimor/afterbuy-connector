@@ -18,7 +18,7 @@ class Order
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="integer")
@@ -45,11 +45,9 @@ class Order
         return $this->externalId;
     }
 
-    public function setExternalId(int $externalId): self
+    public function setExternalId(int $externalId): void
     {
         $this->externalId = $externalId;
-
-        return $this;
     }
 
     /**

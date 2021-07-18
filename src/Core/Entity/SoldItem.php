@@ -15,7 +15,7 @@ class SoldItem
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="integer")
@@ -43,6 +43,11 @@ class SoldItem
      */
     private float $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="soldItems")
+     */
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,11 +58,9 @@ class SoldItem
         return $this->externalId;
     }
 
-    public function setExternalId(int $externalId): self
+    public function setExternalId(int $externalId): void
     {
         $this->externalId = $externalId;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -65,11 +68,9 @@ class SoldItem
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     public function getQuantity(): ?int
@@ -77,11 +78,9 @@ class SoldItem
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
-
-        return $this;
     }
 
     public function getOrder(): Order
@@ -102,5 +101,15 @@ class SoldItem
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): void
+    {
+        $this->category = $category;
     }
 }
