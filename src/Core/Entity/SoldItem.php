@@ -49,9 +49,10 @@ class SoldItem
     private ?Category $category = null;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\OneToOne(targetEntity=Volume::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn()
      */
-    private ?float $volume = null;
+    private ?Volume $volume = null;
 
     public function getId(): ?int
     {
@@ -118,12 +119,12 @@ class SoldItem
         $this->category = $category;
     }
 
-    public function getVolume(): ?float
+    public function getVolume(): ?Volume
     {
         return $this->volume;
     }
 
-    public function setVolume(?float $volume): void
+    public function setVolume(Volume $volume): void
     {
         $this->volume = $volume;
     }

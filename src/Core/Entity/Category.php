@@ -32,6 +32,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity=CategoryRule::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\JoinColumn()
      */
     private Collection $categoryRules;
 

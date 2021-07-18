@@ -23,6 +23,11 @@ class CategoryRule
     private string $entry;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isStop;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="categoryRules")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -43,7 +48,7 @@ class CategoryRule
         $this->entry = $entry;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): Category
     {
         return $this->category;
     }
@@ -51,5 +56,15 @@ class CategoryRule
     public function setCategory(Category $category): void
     {
         $this->category = $category;
+    }
+
+    public function isStop(): bool
+    {
+        return $this->isStop;
+    }
+
+    public function setIsStop(bool $isStop): void
+    {
+        $this->isStop = $isStop;
     }
 }
