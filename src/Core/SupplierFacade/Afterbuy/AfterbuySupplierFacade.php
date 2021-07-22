@@ -4,6 +4,7 @@
 namespace App\Core\SupplierFacade\Afterbuy;
 
 
+use App\Core\Entity\AfterbuyAccount;
 use App\Core\Entity\Collection\OrderCollection;
 use App\Core\SupplierFacade\Afterbuy\MethodFacade\AfterbuyGetSoldItemsMethodFacade;
 
@@ -16,8 +17,8 @@ class AfterbuySupplierFacade
         $this->getSoldItemsMethodFacade = $getSoldItemsMethodFacade;
     }
 
-    public function getSoldItems(): OrderCollection
+    public function getSoldItems(AfterbuyAccount $afterbuyAccount): OrderCollection
     {
-        return $this->getSoldItemsMethodFacade->commit();
+        return $this->getSoldItemsMethodFacade->commit($afterbuyAccount);
     }
 }

@@ -1,0 +1,48 @@
+RewriteEngine On
+
+Header always add Access-Control-Allow-Origin "*"
+Header always add Access-Control-Allow-Headers: "content-type, Referer, Accept, User-Agent"
+Header always add Access-Control-Allow-Methods: "POST, GET, OPTIONS, DELETE, PUT"
+
+# Redirect to URI without front controller to prevent duplicate content
+# (with and without `/app.php`). Only do this redirect on the initial
+# rewrite by Apache and not on subsequent cycles. Otherwise we would get an
+# endless redirect loop (request -> rewrite to front controller ->
+# redirect -> request -> ...).
+# So in case you get a "too many redirects" error or you always get redirected
+# to the startpage because your Apache does not expose the REDIRECT_STATUS
+# environment variable, you have 2 choices:
+# - disable this feature by commenting the following 2 lines or
+# - use Apache >= 2.3.9 and replace all L flags by END flags and remove the
+#   following RewriteCond (best solution)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,L]
+
+# If the requested filename exists, simply serve it.
+# We only want to let Apache serve files and not directories.
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .? - [L]
+
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# cache-bust assets url rewrite
+# Example format: /cpv-10/js/test123.js -> /js/test123.js
+# This allows us to change the asset version and "bust" intermediate caches (like varnish)
+# See http://symfony.com/doc/current/reference/configuration/framework.html#ref-framework-assets-version
+# See http://symfony.com/doc/current/reference/configuration/framework.html#assets-version-format
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^cpv-\d+\/(.+)$ $1 [L]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# The following rewrites all other queries to the front controller. The
+# condition ensures that if you are using Apache aliases to do mass virtual
+# hosting, the base path will be prepended to allow proper resolution of the
+# app.php file; it will work in non-aliased environments as well, providing
+# a safe, one-size fits all solution.
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+RewriteRule .? %{ENV:BASE}index.php [L]

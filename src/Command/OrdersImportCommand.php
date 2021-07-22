@@ -29,9 +29,8 @@ class OrdersImportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $this->ordersImportManager->importAll();
-
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $this->ordersImportManager->importAllAndSave();
+        $io->success('Orders are imported successfully');
 
         return Command::SUCCESS;
     }

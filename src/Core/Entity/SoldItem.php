@@ -124,7 +124,7 @@ class SoldItem
         return $this->volume;
     }
 
-    public function setVolume(Volume $volume): void
+    public function setVolume(?Volume $volume): void
     {
         $this->volume = $volume;
     }

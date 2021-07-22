@@ -4,6 +4,7 @@
 namespace App\Core\SupplierFacade\Afterbuy\Bridge\Request\GetSoldItems;
 
 
+use App\Core\Entity\AfterbuyAccount;
 use App\Core\SupplierFacade\Afterbuy\Bridge\Request\AfterbuyGlobalRequestBridge;
 use App\Supplier\Afterbuy\Enum\AfterbuyCallNameEnum;
 use App\Supplier\Afterbuy\Request\GetSoldItems\AfterbuyGetSoldItemsRequest;
@@ -23,11 +24,11 @@ class AfterbuyGetSoldItemsRequestBridge
         $this->globalBridge = $globalBridge;
     }
 
-    public function build(): AfterbuyGetSoldItemsRequest
+    public function build(AfterbuyAccount $afterbuyAccount): AfterbuyGetSoldItemsRequest
     {
         $getSoldItemsRequest = new AfterbuyGetSoldItemsRequest();
 
-        $global = $this->globalBridge->build(AfterbuyCallNameEnum::get(AfterbuyCallNameEnum::GET_SOLD_ITEMS));
+        $global = $this->globalBridge->build($afterbuyAccount, AfterbuyCallNameEnum::get(AfterbuyCallNameEnum::GET_SOLD_ITEMS));
         $getSoldItemsRequest->setAfterbuyGlobal($global);
 
         $getSoldItemsRequest->setRequestAllItems(self::DO_NOT_REQUEST);

@@ -2,6 +2,7 @@
 
 namespace App\Core\Entity;
 
+use App\Core\Entity\Collection\CategoryRuleCollection;
 use App\Core\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,12 +35,12 @@ class Category
      * @ORM\OneToMany(targetEntity=CategoryRule::class, mappedBy="category", orphanRemoval=true)
      * @ORM\JoinColumn()
      */
-    private Collection $categoryRules;
+    private Collection $rules;
 
     public function __construct()
     {
         $this->soldItems = new ArrayCollection();
-        $this->categoryRules = new ArrayCollection();
+        $this->rules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,15 +77,20 @@ class Category
     /**
      * @return Collection|CategoryRule[]
      */
-    public function getCategoryRules(): Collection
+    public function getRules(): Collection
     {
-        return $this->categoryRules;
+        return $this->rules;
+    }
+
+    public function getRulesCollection(): CategoryRuleCollection
+    {
+        return new CategoryRuleCollection($this->rules->toArray());
     }
 
     public function addCategoryRule(CategoryRule $categoryRule): void
     {
-        if (!$this->categoryRules->contains($categoryRule)) {
-            $this->categoryRules[] = $categoryRule;
+        if (!$this->rules->contains($categoryRule)) {
+            $this->rules[] = $categoryRule;
             $categoryRule->setCategory($this);
         }
     }

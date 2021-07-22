@@ -22,7 +22,7 @@ class AfterbuySoldItemResponseBridge
 
         $price = $supplierSoldItem->getItemOriginalCurrency()->getItemPrice();
         if ($price >= 0) {
-            $soldItem->setPrice($supplierSoldItem->getItemOriginalCurrency()->getItemPrice());
+            $soldItem->setPrice($price);
         } else {
             throw new IgnoreCoreSupplierException();
         }

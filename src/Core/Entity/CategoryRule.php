@@ -2,7 +2,10 @@
 
 namespace App\Core\Entity;
 
+use App\Core\Entity\Collection\CategoryRuleEntryCollection;
 use App\Core\Repository\CategoryRuleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,34 +21,24 @@ class CategoryRule
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $entry;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private bool $isStop;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="categoryRules")
      * @ORM\JoinColumn(nullable=false)
      */
     private Category $category;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CategoryRuleEntry::class, mappedBy="categoryRule", orphanRemoval=true)
+     */
+    private Collection $entries;
+
+    public function __construct()
+    {
+        $this->entries = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEntry(): ?string
-    {
-        return $this->entry;
-    }
-
-    public function setEntry(string $entry): void
-    {
-        $this->entry = $entry;
     }
 
     public function getCategory(): Category
@@ -58,13 +51,24 @@ class CategoryRule
         $this->category = $category;
     }
 
-    public function isStop(): bool
+    /**
+     * @return Collection|CategoryRuleEntry[]
+     */
+    public function getEntries(): Collection
     {
-        return $this->isStop;
+        return $this->entries;
     }
 
-    public function setIsStop(bool $isStop): void
+    public function getEntryCollection(): CategoryRuleEntryCollection
     {
-        $this->isStop = $isStop;
+        return new CategoryRuleEntryCollection($this->entries->toArray());
+    }
+
+    public function addEntry(CategoryRuleEntry $entry): void
+    {
+        if (!$this->entries->contains($entry)) {
+            $this->entries[] = $entry;
+            $entry->setCategoryRule($this);
+        }
     }
 }

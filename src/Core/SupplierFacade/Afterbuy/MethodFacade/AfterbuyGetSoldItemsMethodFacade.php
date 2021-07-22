@@ -4,6 +4,7 @@
 namespace App\Core\SupplierFacade\Afterbuy\MethodFacade;
 
 
+use App\Core\Entity\AfterbuyAccount;
 use App\Core\Entity\Collection\OrderCollection;
 use App\Core\SupplierFacade\Afterbuy\Bridge\Request\GetSoldItems\AfterbuyGetSoldItemsRequestBridge;
 use App\Core\SupplierFacade\Afterbuy\Bridge\Response\GetSoldItems\AfterbuyGetSoldItemsResponseBridge;
@@ -35,9 +36,9 @@ class AfterbuyGetSoldItemsMethodFacade
         $this->config = $config;
     }
 
-    public function commit(): OrderCollection
+    public function commit(AfterbuyAccount $afterbuyAccount): OrderCollection
     {
-        $request = $this->requestBridge->build();
+        $request = $this->requestBridge->build($afterbuyAccount);
 
         $requestBody = $this->serializer->serialize($request, 'xml');
 
