@@ -14,7 +14,6 @@ class ProductCodeParserService
     {
         preg_match(self::PRODUCT_CODE_REGEX, $soldItem->getTitle(), $matches);
 
-        dump($matches);
         return $matches[1] ?? null;
     }
 }
