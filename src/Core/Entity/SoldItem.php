@@ -54,6 +54,11 @@ class SoldItem
      */
     private ?Volume $volume = null;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $productCode = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,5 +132,15 @@ class SoldItem
     public function setVolume(?Volume $volume): void
     {
         $this->volume = $volume;
+    }
+
+    public function getProductCode(): ?string
+    {
+        return $this->productCode;
+    }
+
+    public function setProductCode(?string $productCode): void
+    {
+        $this->productCode = $productCode;
     }
 }

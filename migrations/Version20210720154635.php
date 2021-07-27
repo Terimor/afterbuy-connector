@@ -15,13 +15,13 @@ final class Version20210720154635 extends AbstractMigration
     private const ACCOUNTS_TO_ADD = [
         [
             'userId' => 'precoa',
-            'userPassword' => 'Delta3201!!!-pre3',
+            'userPassword' => 'Delta3201!!!-pre4',
             'partnerId' => '103701',
             'partnerPassword' => 'YTEmJ9JGjTBPJuYuaPLe9Jsfk',
         ],
         [
             'userId' => 'caircon',
-            'userPassword' => 'Delta3201!!!-cai3',
+            'userPassword' => 'Delta3201!!!-cai4',
             'partnerId' => '102515',
             'partnerPassword' => '9E5X=AzDJE7(ZE0u1dxEI)YQu',
         ],

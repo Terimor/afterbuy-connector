@@ -7,6 +7,7 @@ namespace App\Core\Manager;
 use App\Core\Entity\AfterbuyAccount;
 use App\Core\Entity\Collection\OrderCollection;
 use App\Core\Manager\Service\CategorySorterService;
+use App\Core\Manager\Service\ProductCodeParserService;
 use App\Core\Manager\Service\VolumeParserService;
 use App\Core\Repository\AfterbuyAccountRepository;
 use App\Core\Repository\CategoryRepository;
@@ -25,6 +26,8 @@ class OrdersImportManager
 
     private VolumeParserService $volumeParserService;
 
+    private ProductCodeParserService $productCodeParserService;
+
     private AfterbuyAccountRepository $afterbuyAccountRepository;
 
     public function __construct(
@@ -33,6 +36,7 @@ class OrdersImportManager
         CategorySorterService $categorySorterService,
         CategoryRepository $categoryRepository,
         VolumeParserService $volumeParserService,
+        ProductCodeParserService $productCodeParserService,
         AfterbuyAccountRepository $afterbuyAccountRepository
     ) {
         $this->afterbuySupplierFacade = $afterbuySupplierFacade;
@@ -40,6 +44,7 @@ class OrdersImportManager
         $this->categorySorterService = $categorySorterService;
         $this->categoryRepository = $categoryRepository;
         $this->volumeParserService = $volumeParserService;
+        $this->productCodeParserService = $productCodeParserService;
         $this->afterbuyAccountRepository = $afterbuyAccountRepository;
     }
 
@@ -54,6 +59,9 @@ class OrdersImportManager
 
             $volume = $this->volumeParserService->parseVolume($soldItem);
             $soldItem->setVolume($volume);
+
+            $productCode = $this->productCodeParserService->parseProductCode($soldItem);
+            $soldItem->setProductCode($productCode);
         }
 
         return $orders;

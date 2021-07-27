@@ -29,6 +29,9 @@ class ApiSoldItem
     /** @Serializer\Type("App\Api\Entity\Common\ApiVolume") */
     private ?ApiVolume $volume = null;
 
+    /** @Serializer\Type("string") */
+    private ?string $productCode = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,5 +100,15 @@ class ApiSoldItem
     public function setVolume(?ApiVolume $volume): void
     {
         $this->volume = $volume;
+    }
+
+    public function getProductCode(): ?string
+    {
+        return $this->productCode;
+    }
+
+    public function setProductCode(?string $productCode): void
+    {
+        $this->productCode = $productCode;
     }
 }

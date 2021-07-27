@@ -41,6 +41,8 @@ class SoldItemResponseBridge
             $apiSoldItem->setVolume($apiVolume);
         }
 
+        $apiSoldItem->setProductCode($soldItem->getProductCode());
+
         return $apiSoldItem;
     }
 }
