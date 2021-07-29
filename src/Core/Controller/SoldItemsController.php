@@ -23,7 +23,7 @@ class SoldItemsController extends AbstractController
     }
 
     /**
-     * @Route("/sold-items", name="sold_item_list", methods={"GET"})
+     * @Route("/sold-items", name="get_sold_item_list", methods={"GET"})
      */
     public function getAll(): Response
     {

@@ -24,8 +24,16 @@ class CategorySorterService
 
     private function isAppropriateCategory(SoldItem $soldItem, Category $category): bool
     {
-        foreach ($category->getRulesCollection() as $rule) {
-            if ($this->isAppropriateRule($soldItem, $rule)) {
+        $activeRules = $category->getRulesCollection()->filterActive();
+
+        foreach ($activeRules->filterExcluding() as $excludingRule) {
+            if (!$this->isAppropriateExcludingRule($soldItem, $excludingRule)) {
+                return false;
+            }
+        }
+
+        foreach ($activeRules->filterIncluding() as $includingRule) {
+            if ($this->isAppropriateIncludingRule($soldItem, $includingRule)) {
                 return true;
             }
         }
@@ -33,18 +41,21 @@ class CategorySorterService
         return false;
     }
 
-    private function isAppropriateRule(SoldItem $soldItem, CategoryRule $rule): bool
+    private function isAppropriateExcludingRule(SoldItem $soldItem, CategoryRule $excludingRule): bool
     {
-        $entries = $rule->getEntryCollection();
-
-        foreach ($entries->filterByIncluded() as $entry) {
-            if (mb_stripos($soldItem->getTitle(), $entry->getEntry()) === false) {
+        foreach ($excludingRule->getEntryCollection() as $ruleEntry) {
+            if (mb_stripos($ruleEntry->getEntry(), $soldItem->getTitle()) !== false) {
                 return false;
             }
         }
 
-        foreach ($entries->filterByExcluded() as $entry) {
-            if (mb_stripos($soldItem->getTitle(), $entry->getEntry()) !== false) {
+        return true;
+    }
+
+    private function isAppropriateIncludingRule(SoldItem $soldItem, CategoryRule $includingRule): bool
+    {
+        foreach ($includingRule->getEntryCollection() as $ruleEntry) {
+            if (mb_stripos($ruleEntry->getEntry(), $soldItem->getTitle()) === false) {
                 return false;
             }
         }

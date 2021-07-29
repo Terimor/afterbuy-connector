@@ -17,11 +17,6 @@ class CategoryRuleEntry
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private bool $isExcluding;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private string $entry;
@@ -35,16 +30,6 @@ class CategoryRuleEntry
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function isExcluding(): bool
-    {
-        return $this->isExcluding;
-    }
-
-    public function setExcluding(bool $isExcluding): void
-    {
-        $this->isExcluding = $isExcluding;
     }
 
     public function getEntry(): string

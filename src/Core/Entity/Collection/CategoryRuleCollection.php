@@ -23,4 +23,19 @@ class CategoryRuleCollection extends AbstractCollection
     {
         return CategoryRule::class;
     }
+
+    public function filterActive(): self
+    {
+        return $this->filter(static fn(CategoryRule $categoryRule) => $categoryRule->isActive());
+    }
+
+    public function filterIncluding(): self
+    {
+        return $this->filter(static fn(CategoryRule $categoryRule) => !$categoryRule->isExcluding());
+    }
+
+    public function filterExcluding(): self
+    {
+        return $this->filter(static fn(CategoryRule $categoryRule) => $categoryRule->isExcluding());
+    }
 }

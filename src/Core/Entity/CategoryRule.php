@@ -31,6 +31,16 @@ class CategoryRule
      */
     private Collection $entries;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isExcluding;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isActive;
+
     public function __construct()
     {
         $this->entries = new ArrayCollection();
@@ -70,5 +80,25 @@ class CategoryRule
             $this->entries[] = $entry;
             $entry->setCategoryRule($this);
         }
+    }
+
+    public function isExcluding(): bool
+    {
+        return $this->isExcluding;
+    }
+
+    public function setExcluding(bool $isExcluding): void
+    {
+        $this->isExcluding = $isExcluding;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 }
