@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("category", methods={"GET"})
+     * @Route("categories", methods={"GET"})
      */
     public function getAllCategories(): Response
     {
@@ -35,7 +35,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("category/{id}", requirements={"id"="\d+"}, name="get_category", methods={"GET"})
+     * @Route("categories/{id}", requirements={"id"="\d+"}, name="get_category", methods={"GET"})
      * @ParamConverter("category", class="App\Core\Entity\Category")
      */
     public function getCategory(Category $category): Response
