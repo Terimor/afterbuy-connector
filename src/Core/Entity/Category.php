@@ -32,7 +32,7 @@ class Category
     private string $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=CategoryRule::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CategoryRule::class, mappedBy="category", orphanRemoval=true, cascade={"persist", "remove"})
      * @ORM\JoinColumn()
      */
     private Collection $rules;
@@ -46,6 +46,11 @@ class Category
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -87,7 +92,7 @@ class Category
         return new CategoryRuleCollection($this->rules->toArray());
     }
 
-    public function addCategoryRule(CategoryRule $categoryRule): void
+    public function addRule(CategoryRule $categoryRule): void
     {
         if (!$this->rules->contains($categoryRule)) {
             $this->rules[] = $categoryRule;

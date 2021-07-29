@@ -21,6 +21,6 @@ class ApiResponseBuilder
     {
         $serializedResponse = $this->serializer->serialize($response, 'json');
 
-        return new JsonResponse($serializedResponse, JsonResponse::HTTP_OK, [], true);
+        return new JsonResponse($serializedResponse, $response->getStatusCode(), [], true);
     }
 }

@@ -32,6 +32,6 @@ class CategoryRuleResponseBridge
             $entries[] = $entry->getEntry();
         }
 
-        return implode(BridgeConstants::RULE_ENTRY_DELIMITER, $entries);
+        return implode(BridgeConstants::RULE_ENTRY_JOIN_DELIMITER, $entries);
     }
 }

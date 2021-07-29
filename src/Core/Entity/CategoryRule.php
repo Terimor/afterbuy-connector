@@ -27,7 +27,7 @@ class CategoryRule
     private Category $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=CategoryRuleEntry::class, mappedBy="categoryRule", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CategoryRuleEntry::class, mappedBy="categoryRule", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private Collection $entries;
 
@@ -87,7 +87,7 @@ class CategoryRule
         return $this->isExcluding;
     }
 
-    public function setExcluding(bool $isExcluding): void
+    public function setIsExcluding(bool $isExcluding): void
     {
         $this->isExcluding = $isExcluding;
     }

@@ -1,19 +1,19 @@
 <?php
 
 
-namespace App\Api\Entity\Response;
+namespace App\Api\Entity\Request;
 
 
 use App\Api\Entity\Common\ApiCategory;
 use JMS\Serializer\Annotation as Serializer;
 
-class ApiCategoryResponse extends ApiSuccessResponse
+class ApiCategoryRequest implements ApiRequestInterface
 {
     /** @Serializer\Type("App\Api\Entity\Common\ApiCategory") */
     private ApiCategory $category;
 
-    public function __construct(ApiCategory $category)
+    public function getCategory(): ApiCategory
     {
-        $this->category = $category;
+        return $this->category;
     }
 }

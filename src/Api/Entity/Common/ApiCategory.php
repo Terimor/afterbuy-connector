@@ -5,6 +5,7 @@ namespace App\Api\Entity\Common;
 
 
 use App\Api\Entity\Common\Collection\ApiCategoryRuleCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation as Serializer;
 
 class ApiCategory
@@ -16,11 +17,11 @@ class ApiCategory
     private string $name;
 
     /** @Serializer\Type("ArrayCollection<App\Api\Entity\Common\ApiCategoryRule>") */
-    private ApiCategoryRuleCollection $rules;
+    private ArrayCollection $rules;
 
     public function __construct()
     {
-        $this->rules = new ApiCategoryRuleCollection();
+        $this->rules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,7 +46,7 @@ class ApiCategory
 
     public function getRules(): ApiCategoryRuleCollection
     {
-        return $this->rules;
+        return new ApiCategoryRuleCollection($this->rules->toArray());
     }
 
     public function addRule(ApiCategoryRule $categoryRule): void

@@ -27,6 +27,11 @@ class CategoryRuleEntry
      */
     private CategoryRule $categoryRule;
 
+    public function __construct(string $entry)
+    {
+        $this->entry = $entry;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
