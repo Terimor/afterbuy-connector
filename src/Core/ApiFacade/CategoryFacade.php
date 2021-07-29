@@ -51,6 +51,16 @@ class CategoryFacade
         return new ApiCategoryResponse($apiCategory);
     }
 
+    public function create(ApiCategoryRequest $categoryRequest): ApiSuccessResponse
+    {
+        $apiCategory = $categoryRequest->getCategory();
+
+        $category = $this->categoryRequestBridge->build($apiCategory);
+        $this->categoryRepository->save($category);
+
+        return new ApiSuccessResponse();
+    }
+
     public function update(ApiCategoryRequest $categoryRequest): ApiSuccessResponse
     {
         $apiCategory = $categoryRequest->getCategory();

@@ -51,13 +51,19 @@ class CategoryController extends AbstractController
         return $this->responseBuilder->build($response);
     }
 
-//    /**
-//     * @Route("categories", name="create_category", methods={"POST"})
-//     */
-//    public function createCategory(Request $request): Response
-//    {
-//        //todo:: impelement create category
-//    }
+    /**
+     * @Route("categories", name="create_category", methods={"POST"})
+     */
+    public function createCategory(Request $request): Response
+    {
+        $data = $request->getContent();
+        /** @var ApiCategoryRequest $requestEntity */
+        $requestEntity = $this->requestBuilder->build($data, ApiCategoryRequest::class);
+
+        $response = $this->categoryFacade->create($requestEntity);
+
+        return $this->responseBuilder->build($response);
+    }
 
     /**
      * @Route("categories", name="update_category", methods={"PUT"})
