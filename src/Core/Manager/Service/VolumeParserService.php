@@ -11,7 +11,7 @@ use App\Core\Enum\UnitEnum;
 class VolumeParserService
 {
     private const VOLUME_REGEX = '#(\d+(?:[\.,]{0,1})\d*)(kg|l)#i';
-    private const VOLUME_RANGE_REGEX = '#(\d+(?:[\.,]{0,1})\d*)(kg|l)\s*-\s*(\d+(?:[\.,]{0,1})\d*)(kg|l)#i';
+    private const VOLUME_RANGE_REGEX = '#(\d+(?:[\.,]{0,1})\d*)(kg|l)*\s*-\s*(\d+(?:[\.,]{0,1})\d*)(kg|l)#i';
 
     private const MAX_TRUTHFUL_VOLUME_LIMIT = 25;
 
