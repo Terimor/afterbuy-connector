@@ -22,8 +22,9 @@ class CategoryRequestBridge
 
     public function build(ApiCategory $apiCategory): Category
     {
-        $category = $this->categoryRepository->findOneById($apiCategory->getId());
-        if (!$category) {
+        if ($apiCategory->getId()) {
+            $category = $this->categoryRepository->findOneById($apiCategory->getId());
+        } else {
             $category = new Category();
         }
 
