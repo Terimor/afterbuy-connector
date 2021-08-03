@@ -9,11 +9,24 @@ use JMS\Serializer\Annotation as Serializer;
 
 class ApiOrder
 {
+    /** @Serializer\Type("int") */
+    private int $id;
+
     /** @Serializer\Type("DateTimeImmutable") */
     private DateTimeImmutable $dateTime;
 
     /** @Serializer\Type("string") */
     private string $afterbuyAccountName;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getDateTime(): DateTimeImmutable
     {

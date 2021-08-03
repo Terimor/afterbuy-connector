@@ -13,6 +13,7 @@ class OrderResponseBridge
     {
         $apiOrder = new ApiOrder();
 
+        $apiOrder->setId($order->getId());
         $apiOrder->setDateTime($order->getDateTime());
         $apiOrder->setAfterbuyAccountName($order->getAfterbuyAccount()->getUserId());
 
