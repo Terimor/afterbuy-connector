@@ -4,11 +4,15 @@
 namespace App\Api\Entity\Common;
 
 
+use JMS\Serializer\Annotation as Serializer;
+
 class ApiVolume
 {
+    /** @Serializer\Type("string") */
     private string $unit;
 
-    private float $amount;
+    /** @Serializer\Type("int") */
+    private int $amount;
 
     public function getUnit(): string
     {
@@ -20,12 +24,12 @@ class ApiVolume
         $this->unit = $unit;
     }
 
-    public function getAmount(): float
+    public function getAmount(): int
     {
         return $this->amount;
     }
 
-    public function setAmount(float $amount): void
+    public function setAmount(int $amount): void
     {
         $this->amount = $amount;
     }
