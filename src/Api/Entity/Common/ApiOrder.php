@@ -12,6 +12,9 @@ class ApiOrder
     /** @Serializer\Type("int") */
     private int $id;
 
+    /** @Serializer\Type("int") */
+    private int $externalId;
+
     /** @Serializer\Type("DateTimeImmutable") */
     private DateTimeImmutable $dateTime;
 
@@ -26,6 +29,16 @@ class ApiOrder
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getExternalId(): int
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId(int $externalId): void
+    {
+        $this->externalId = $externalId;
     }
 
     public function getDateTime(): DateTimeImmutable

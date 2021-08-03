@@ -52,7 +52,7 @@ class Order
         return $this->id;
     }
 
-    public function getExternalId(): ?int
+    public function getExternalId(): int
     {
         return $this->externalId;
     }
