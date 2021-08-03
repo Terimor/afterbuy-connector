@@ -13,10 +13,16 @@ class SoldItemResponseBridge
 
     private VolumeResponseBridge $volumeResponseBridge;
 
-    public function __construct(CategoryResponseBridge $categoryResponseBridge, VolumeResponseBridge $volumeResponseBridge)
-    {
+    private OrderResponseBridge $orderResponseBridge;
+
+    public function __construct(
+        CategoryResponseBridge $categoryResponseBridge,
+        VolumeResponseBridge $volumeResponseBridge,
+        OrderResponseBridge $orderResponseBridge
+    ) {
         $this->categoryResponseBridge = $categoryResponseBridge;
         $this->volumeResponseBridge = $volumeResponseBridge;
+        $this->orderResponseBridge = $orderResponseBridge;
     }
 
     public function build(SoldItem $soldItem): ApiSoldItem
@@ -26,7 +32,6 @@ class SoldItemResponseBridge
         $apiSoldItem->setId($soldItem->getId());
         $apiSoldItem->setTitle($soldItem->getTitle());
         $apiSoldItem->setQuantity($soldItem->getQuantity());
-        $apiSoldItem->setOrderId($soldItem->getOrder()->getId());
         $apiSoldItem->setPrice($soldItem->getPrice());
 
         $category = $soldItem->getCategory();
@@ -40,6 +45,9 @@ class SoldItemResponseBridge
             $apiVolume = $this->volumeResponseBridge->build($volume);
             $apiSoldItem->setVolume($apiVolume);
         }
+
+        $apiOrder = $this->orderResponseBridge->build($soldItem->getOrder());
+        $apiSoldItem->setOrder($apiOrder);
 
         $apiSoldItem->setProductCode($soldItem->getProductCode());
 

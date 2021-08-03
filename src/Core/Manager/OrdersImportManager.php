@@ -64,6 +64,10 @@ class OrdersImportManager
             $soldItem->setProductCode($productCode);
         }
 
+        foreach ($orders as $order) {
+            $order->setAfterbuyAccount($afterbuyAccount);
+        }
+
         return $orders;
     }
 

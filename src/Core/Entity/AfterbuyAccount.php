@@ -3,6 +3,7 @@
 namespace App\Core\Entity;
 
 use App\Core\Repository\AfterbuyAccountRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,11 @@ class AfterbuyAccount
      * @ORM\Column(type="string", length=255)
      */
     private string $partnerPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="afterbuyAccount")
+     */
+    private Collection $orders;
 
     public function getId(): ?int
     {

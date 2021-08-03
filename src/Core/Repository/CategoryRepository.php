@@ -25,7 +25,7 @@ class CategoryRepository extends ServiceEntityRepository
         return new CategoryCollection(parent::findAll());
     }
 
-    public function findOneById(int $id): Category
+    public function findOneById(int $id): ?Category
     {
         $qb = $this->createQueryBuilder('category')
             ->andWhere('category.id = :id')

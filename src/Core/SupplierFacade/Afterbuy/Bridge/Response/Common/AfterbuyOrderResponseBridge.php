@@ -31,6 +31,8 @@ class AfterbuyOrderResponseBridge
         $order = new Order();
 
         $order->setExternalId($supplierOrder->getOrderID());
+        $order->setDateTime($supplierOrder->getOrderDate());
+
         foreach ($supplierOrder->getSoldItems() as $supplierSoldItem) {
             try {
                 $soldItem = $this->soldItemResponseBridge->build($supplierSoldItem);

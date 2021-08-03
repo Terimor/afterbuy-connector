@@ -17,8 +17,8 @@ class ApiSoldItem
     /** @Serializer\Type("int") */
     private int $quantity;
 
-    /** @Serializer\Type("int") */
-    private int $orderId;
+    /** @Serializer\Type("App\Api\Entity\Common\ApiOrder") */
+    private ApiOrder $order;
 
     /** @Serializer\Type("float") */
     private float $price;
@@ -62,14 +62,14 @@ class ApiSoldItem
         $this->quantity = $quantity;
     }
 
-    public function getOrderId(): int
+    public function getOrder(): ApiOrder
     {
-        return $this->orderId;
+        return $this->order;
     }
 
-    public function setOrderId(int $orderId): void
+    public function setOrder(ApiOrder $order): void
     {
-        $this->orderId = $orderId;
+        $this->order = $order;
     }
 
     public function getPrice(): float

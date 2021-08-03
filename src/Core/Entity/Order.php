@@ -3,6 +3,7 @@
 namespace App\Core\Entity;
 
 use App\Core\Repository\OrderRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,6 +25,17 @@ class Order
      * @ORM\Column(type="integer")
      */
     private int $externalId;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=false)
+     */
+    private DateTimeImmutable $dateTime;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=AfterbuyAccount::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private AfterbuyAccount $afterbuyAccount;
 
     /**
      * @ORM\OneToMany(targetEntity=SoldItem::class, mappedBy="order", orphanRemoval=true, cascade={"persist", "remove"})
@@ -48,6 +60,26 @@ class Order
     public function setExternalId(int $externalId): void
     {
         $this->externalId = $externalId;
+    }
+
+    public function getDateTime(): DateTimeImmutable
+    {
+        return $this->dateTime;
+    }
+
+    public function setDateTime(DateTimeImmutable $dateTime): void
+    {
+        $this->dateTime = $dateTime;
+    }
+
+    public function getAfterbuyAccount(): AfterbuyAccount
+    {
+        return $this->afterbuyAccount;
+    }
+
+    public function setAfterbuyAccount(AfterbuyAccount $afterbuyAccount): void
+    {
+        $this->afterbuyAccount = $afterbuyAccount;
     }
 
     /**
