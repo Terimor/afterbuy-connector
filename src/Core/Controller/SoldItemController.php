@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class SoldItemsController extends AbstractController
+class SoldItemController extends AbstractController
 {
     private SoldItemsFacade $soldItemsFacade;
 
