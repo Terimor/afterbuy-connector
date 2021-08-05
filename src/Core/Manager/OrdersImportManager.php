@@ -6,9 +6,9 @@ namespace App\Core\Manager;
 
 use App\Core\Entity\AfterbuyAccount;
 use App\Core\Entity\Collection\OrderCollection;
-use App\Core\Manager\Service\CategorySorterService;
-use App\Core\Manager\Service\ProductCodeParserService;
-use App\Core\Manager\Service\VolumeParserService;
+use App\Core\Service\CategorySorterService;
+use App\Core\Service\ProductCodeParserService;
+use App\Core\Service\VolumeParserService;
 use App\Core\Repository\AfterbuyAccountRepository;
 use App\Core\Repository\CategoryRepository;
 use App\Core\Repository\OrderRepository;

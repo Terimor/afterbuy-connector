@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Core\Manager\Service;
+namespace App\Core\Service;
 
 
 use App\Core\Entity\SoldItem;
