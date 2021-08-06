@@ -138,7 +138,7 @@ class ManualFileSorterService
         fputcsv($stream, $this->buildTotalCsvArray($totalVolumeAmount), self::CSV_DELIMITER);
         rewind($stream);
 
-        return mb_convert_encoding(rtrim(stream_get_contents($stream)), 'UTF-8');
+        return iconv('utf-8', 'CP1252', rtrim(stream_get_contents($stream)));
     }
 
     private function buildCsvArrayFromSoldItem(SoldItem $soldItem): array
