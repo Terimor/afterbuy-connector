@@ -36,7 +36,7 @@ class SoldItemController extends AbstractController
     }
 
     /**
-     * @Route("/sold-items/manual-sort", name="get_sold_item_list", methods={"POST"})
+     * @Route("/sold-items/manual-sort", name="sold_items_manual_sort", methods={"POST"})
      */
     public function manualSort(Request $request): Response
     {
