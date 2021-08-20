@@ -44,7 +44,7 @@ class CategorySorterService
     private function isAppropriateExcludingRule(SoldItem $soldItem, CategoryRule $excludingRule): bool
     {
         foreach ($excludingRule->getEntryCollection() as $ruleEntry) {
-            if (mb_stripos($ruleEntry->getEntry(), $soldItem->getTitle()) !== false) {
+            if (mb_stripos($soldItem->getTitle(), $ruleEntry->getEntry()) !== false) {
                 return false;
             }
         }
@@ -55,7 +55,7 @@ class CategorySorterService
     private function isAppropriateIncludingRule(SoldItem $soldItem, CategoryRule $includingRule): bool
     {
         foreach ($includingRule->getEntryCollection() as $ruleEntry) {
-            if (mb_stripos($ruleEntry->getEntry(), $soldItem->getTitle()) === false) {
+            if (mb_stripos($soldItem->getTitle(), $ruleEntry->getEntry()) === false) {
                 return false;
             }
         }
